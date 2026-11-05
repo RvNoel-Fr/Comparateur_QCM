@@ -4,6 +4,8 @@ Convertit les pages d'un PDF en images PIL via PyMuPDF.
 Gère l'extraction des noms (numérique ou scanné par vision) et le recadrage du nom.
 """
 
+import sys
+sys.modules.setdefault('pymupdf.layout', None)
 try:
     import pymupdf as fitz  # pymupdf >= 1.24
 except ImportError:
