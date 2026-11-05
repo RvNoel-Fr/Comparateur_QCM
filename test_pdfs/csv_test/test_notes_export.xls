@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="Header">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#4F81BD"/>
+   </Borders>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#1F497D" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="CorrHeader">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" ss:Size="10" ss:Color="#276A3C" ss:Bold="1" ss:Italic="1"/>
+   <Interior ss:Color="#E2EFDA" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="GradeCell">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Bold="1" ss:Color="#1F497D"/>
+   <NumberFormat ss:Format="0.00"/>
+  </Style>
+  <Style ss:ID="Center">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+  </Style>
+  <Style ss:ID="Admis">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#276A3C" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="Ajourne">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#C00000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="SummaryLabel">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Bold="1" ss:Color="#1F497D"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Notes QCM">
+  <Table>
+   <Column ss:Width="50"/>
+   <Column ss:Width="160"/>
+   <Column ss:Width="70"/>
+   <Column ss:Width="75"/>
+   <Column ss:Width="65"/>
+   <Column ss:Width="65"/>
+   <Column ss:Width="65"/>
+   <Column ss:Width="65"/>
+   <Column ss:Width="75"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Column ss:Width="40"/>
+   <Row ss:Height="24">
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Place</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Nom de l&#x27;étudiant</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Note / 20</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Pourcentage</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Bonnes réponses</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Fausses réponses</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Réponses blanches</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Total questions</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Statut</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q01</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q02</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q03</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q04</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q05</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q06</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q07</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q08</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q09</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q10</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q11</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q12</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q13</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q14</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q15</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q16</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q17</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q18</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q19</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Q20</Data></Cell>
+   </Row>
+   <Row ss:Height="20">
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">—</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">CORRECTION ATTENDUE</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="Number">20.0</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">100.0 %</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">—</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="CorrHeader"><Data ss:Type="String">B</Data></Cell>
+   </Row>
+   <Row ss:Height="20">
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="String">MOREAU Lucas</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">2.50</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">12.5 %</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="Ajourne"><Data ss:Type="String">Ajourné</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B, C, D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+   </Row>
+   <Row ss:Height="20">
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">ROUX Emma</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">7.50</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">37.5 %</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="Ajourne"><Data ss:Type="String">Ajourné</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C, D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B, C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+   </Row>
+   <Row ss:Height="20">
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">LEFEBVRE Camille</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">5.25</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">26.2 %</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">11</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="Ajourne"><Data ss:Type="String">Ajourné</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C, D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">—</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+   </Row>
+   <Row ss:Height="20">
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="String">DUBOIS Alexandre</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">1.50</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">7.5 %</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="Ajourne"><Data ss:Type="String">Ajourné</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B, C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">—</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A, B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+   </Row>
+   <Row ss:Height="20">
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="String">GIRARD Sophie</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">0.00</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">0.0 %</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="Ajourne"><Data ss:Type="String">Ajourné</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A, B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">—</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">B</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">C</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">A</Data></Cell>
+   </Row>
+   <Row></Row>
+   <Row ss:Height="22">
+    <Cell></Cell>
+    <Cell ss:StyleID="SummaryLabel"><Data ss:Type="String">SYNTHÈSE DE LA PROMOTION</Data></Cell>
+   </Row>
+   <Row ss:Height="20">
+    <Cell></Cell>
+    <Cell ss:StyleID="SummaryLabel"><Data ss:Type="String">Moyenne de la classe</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">3.35</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">16.8 %</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">6.4</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">13.0</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">0.6</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="Admis"><Data ss:Type="String">Taux admis : 0.0 %</Data></Cell>
+   </Row>
+   <Row ss:Height="19">
+    <Cell></Cell>
+    <Cell><Data ss:Type="String">Note minimale</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">0.00</Data></Cell>
+   </Row>
+   <Row ss:Height="19">
+    <Cell></Cell>
+    <Cell><Data ss:Type="String">Note maximale</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">7.50</Data></Cell>
+   </Row>
+   <Row ss:Height="19">
+    <Cell></Cell>
+    <Cell><Data ss:Type="String">Note médiane</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">2.50</Data></Cell>
+   </Row>
+   <Row ss:Height="19">
+    <Cell></Cell>
+    <Cell><Data ss:Type="String">Écart-type</Data></Cell>
+    <Cell ss:StyleID="GradeCell"><Data ss:Type="Number">3.01</Data></Cell>
+   </Row>
+   <Row ss:Height="19">
+    <Cell></Cell>
+    <Cell><Data ss:Type="String">Étudiants admis (≥ 10/20)</Data></Cell>
+    <Cell ss:StyleID="Center"><Data ss:Type="String">0 / 5</Data></Cell>
+    <Cell ss:StyleID="Admis"><Data ss:Type="String">0.0 %</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+</Workbook>

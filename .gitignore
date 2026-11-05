@@ -1,0 +1,29 @@
+# Environnements virtuels
+.venv/
+venv/
+ENV/
+env/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build et distribution
+build/
+dist/
+
+# Fichiers personnels de cours / étudiants réels (RGPD)
+*MT2E1*
+*Thermo*
+*TestHerve*
+*.docx
+*.bak
+
+# Images et dossiers de debug temporaires
+test_pdfs/debug/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini

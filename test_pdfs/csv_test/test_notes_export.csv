@@ -1,0 +1,15 @@
+﻿Place;Nom de l'étudiant;Note / 20;Pourcentage;Bonnes réponses;Fausses réponses;Réponses blanches;Total questions;Statut;Q01;Q02;Q03;Q04;Q05;Q06;Q07;Q08;Q09;Q10;Q11;Q12;Q13;Q14;Q15;Q16;Q17;Q18;Q19;Q20
+—;CORRECTION ATTENDUE;20,00;100,0 %;20;0;0;20;—;A;B;C;D;C;B;A;B;C;D;C;B;A;B;C;D;C;B;A;B
+4;MOREAU Lucas;2,50;12,5 %;6;14;0;20;Ajourné;A;A;C;B;B;D;D;B, C, D;C;D;B;A;A;C;B;D;B;C;B;D
+1;ROUX Emma;7,50;37,5 %;10;10;0;20;Ajourné;A;B;B;D;C, D;B;A;B;C;C;B;A;C;D;B;D;C;B;B, C;D
+5;LEFEBVRE Camille;5,25;26,2 %;8;11;1;20;Ajourné;A;B;C, D;A;C;—;B;D;C;B;D;C;C;B;B;D;D;B;A;A
+3;DUBOIS Alexandre;1,50;7,5 %;5;14;1;20;Ajourné;A;B, C;—;B;A;C;B;D;D;D;C;A;B;C;D;A;A, B;B;C;B
+2;GIRARD Sophie;0,00;0,0 %;3;16;1;20;Ajourné;A;C;B;C;C;D;B;C;D;C;B;A, B;—;B;D;C;B;C;D;A
+
+;SYNTHÈSE DE LA PROMOTION;;;;;;;
+;Moyenne de la classe;3,35;16,8 %;6,4;13,0;0,6;20;Taux admis : 0,0 %
+;Note minimale;0,00
+;Note maximale;7,50
+;Note médiane;2,50
+;Écart-type;3,01
+;Étudiants admis (≥ 10/20);0 / 5;0,0 %

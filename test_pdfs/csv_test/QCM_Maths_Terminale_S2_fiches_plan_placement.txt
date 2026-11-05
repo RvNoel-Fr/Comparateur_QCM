@@ -1,0 +1,20 @@
+============================================================
+  PLAN DE PLACEMENT ALÉATOIRE — Terminale_S2
+  Généré le 05/11/2026 à 09:31  •  Effectif : 5 étudiants
+============================================================
+
+── 1. PLAN DE SALLE (Trié par numéro de place) ───────────────
+  Place N° 01  :  GIRARD Sophie
+  Place N° 02  :  DUBOIS Alexandre
+  Place N° 03  :  MOREAU Lucas
+  Place N° 04  :  ROUX Emma
+  Place N° 05  :  LEFEBVRE Camille
+
+── 2. RECHERCHE RAPIDE (Trié par ordre alphabétique) ─────────
+  DUBOIS Alexandre                -->  Place N° 02
+  GIRARD Sophie                   -->  Place N° 01
+  LEFEBVRE Camille                -->  Place N° 05
+  MOREAU Lucas                    -->  Place N° 03
+  ROUX Emma                       -->  Place N° 04
+
+============================================================
