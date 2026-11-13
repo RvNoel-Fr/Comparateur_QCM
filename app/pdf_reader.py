@@ -296,7 +296,9 @@ def get_name_template(name: str) -> np.ndarray | None:
 def match_printed_name(pil_image: Image.Image, candidates: list[str]) -> tuple[str | None, float]:
     """
     Compare l'image de la zone nom avec une liste de noms d'étudiants candidats
-    par corrélation de gabarit vectoriel (ReportLab Helvetica-Bold 10.5 pt).
+    par corrélation multi-échelle de gabarits vectoriels (ReportLab Helvetica-Bold 10.5 pt).
+    Utilise la boîte englobante de l'encre détectée et une pénalité de longueur
+    pour une discrimination parfaite entre noms courts et longs.
     """
     if not candidates:
         return None, 0.0
@@ -307,19 +309,47 @@ def match_printed_name(pil_image: Image.Image, candidates: list[str]) -> tuple[s
     bx, by, bw, bh = box
     img_np = np.array(pil_image)
     gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY) if img_np.ndim == 3 else img_np
-    # Rogner l'intérieur du cadre nom (la moitié gauche où le nom est inscrit)
-    crop = gray[by + 4 : by + bh - 4, bx + 8 : bx + int(bw * 0.5)]
-    _, bin_crop = cv2.threshold(crop, 195, 255, cv2.THRESH_BINARY_INV)
+
+    # Rogner l'intérieur du cadre nom (jusqu'à 92% de la largeur pour couvrir les noms longs)
+    crop = gray[by + 3 : by + bh - 3, bx + 10 : bx + int(bw * 0.92)]
+    if crop.shape[0] < 10 or crop.shape[1] < 20:
+        return None, 0.0
+
+    # Binarisation avec seuil d'Otsu
+    _, bin_crop = cv2.threshold(crop, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+    # Détection des contours de l'encre
+    cnts, _ = cv2.findContours(bin_crop, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    text_cnts = [c for c in cnts if cv2.boundingRect(c)[3] >= 8 and cv2.boundingRect(c)[2] >= 3]
+    if not text_cnts:
+        return None, 0.0
+
+    tx, ty, tw, th = cv2.boundingRect(np.vstack(text_cnts))
+    if tw < 15 or th < 10:
+        return None, 0.0
+
+    text_crop = bin_crop[max(0, ty - 2) : min(bin_crop.shape[0], ty + th + 2),
+                         max(0, tx - 2) : min(bin_crop.shape[1], tx + tw + 2)]
 
     scores = {}
     for name in candidates:
         tpl = get_name_template(name)
         if tpl is None:
             continue
-        if bin_crop.shape[0] < tpl.shape[0] or bin_crop.shape[1] < tpl.shape[1]:
-            continue
-        res = cv2.matchTemplate(bin_crop, tpl, cv2.TM_CCOEFF_NORMED)
-        scores[name] = float(res.max())
+        best_sc = 0.0
+        # Tester plusieurs échelles pour compenser les petites variations de DPI de numérisation
+        for scale in (0.91, 0.93, 0.95, 0.96, 0.98, 1.0, 1.02):
+            sw = max(4, int(tpl.shape[1] * scale))
+            sh = max(4, int(tpl.shape[0] * scale))
+            if text_crop.shape[0] < sh or text_crop.shape[1] < sw:
+                continue
+            stpl = cv2.resize(tpl, (sw, sh), interpolation=cv2.INTER_AREA)
+            res = cv2.matchTemplate(text_crop, stpl, cv2.TM_CCOEFF_NORMED)
+            width_penalty = abs(tw - sw) / max(tw, sw)
+            sc = float(res.max()) * (1.0 - 0.45 * width_penalty)
+            if sc > best_sc:
+                best_sc = sc
+        scores[name] = best_sc
 
     if not scores:
         return None, 0.0
@@ -402,11 +432,13 @@ def find_best_matching_plan(pdf_path: str, pages_imgs: list[Image.Image]) -> tup
             expected_name = p_map.get(st)
             if expected_name:
                 _, sc = match_printed_name(im, [expected_name])
-                if sc >= 0.28:
+                if sc >= 0.38:
                     matched_count += 1
                     score_sum += sc
 
-        if matched_count > 0 and score_sum > best_score:
+        # Exige qu'au moins 2 pages (ou toutes les pages vérifiées) correspondent avec certitude
+        min_required = min(2, len(checks))
+        if matched_count >= min_required and score_sum > best_score:
             best_score = score_sum
             best_plan = p
             best_map = p_map
@@ -525,15 +557,21 @@ def extract_name(pdf_path: str, page_num: int = 0,
                         # Validation optique indispensable pour éviter d'attribuer un plan arbitraire
                         cand_name = p_map[seat]
                         m_name, sc = match_printed_name(pil_image, [cand_name])
-                        if m_name and sc >= 0.28:
+                        if m_name and sc >= 0.38:
                             active_map.update(p_map)
                             break
 
-        # 4. Si la place correspond dans un plan trouvé
+        # 4. Reconnaissance optique directe du nom imprimé en priorité si des candidats sont connus
+        if all_candidates:
+            matched_name, score = match_printed_name(pil_image, all_candidates)
+            if matched_name and score >= 0.38:
+                return matched_name
+
+        # 5. Si la place correspond dans un plan validé
         if seat is not None and seat in active_map:
             return active_map[seat]
 
-        # 5. Si pas de plan trouvé, enrichir les candidats avec les CSVs disponibles
+        # 6. Si pas encore de nom, enrichir les candidats avec les CSVs disponibles
         if not all_candidates:
             from app.sheet_generator import parse_students_csv
             csv_files = find_candidate_csvs(pdf_path)
@@ -542,12 +580,10 @@ def extract_name(pdf_path: str, page_num: int = 0,
                 for s in c_students:
                     if s not in all_candidates:
                         all_candidates.append(s)
-
-        # 6. Reconnaissance optique directe du nom imprimé dans le cadre
-        if all_candidates:
-            matched_name, score = match_printed_name(pil_image, all_candidates)
-            if matched_name and score >= 0.28:
-                return matched_name
+            if all_candidates:
+                matched_name, score = match_printed_name(pil_image, all_candidates)
+                if matched_name and score >= 0.38:
+                    return matched_name
 
         # 7. Repli sur le numéro de place si détecté
         if seat is not None:

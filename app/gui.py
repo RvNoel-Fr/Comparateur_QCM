@@ -718,8 +718,19 @@ class QCMApp(tk.Tk):
                     from app.sheet_generator import parse_placement_plan
                     seat_map = parse_placement_plan(plan_file)
                 elif plan_file.lower().endswith(".csv"):
-                    from app.sheet_generator import parse_students_csv
+                    from app.sheet_generator import parse_students_csv, parse_placement_plan
                     _, group_students = parse_students_csv(plan_file)
+                    # Recherche automatique d'un plan de placement compagnon pour ce CSV dans son dossier
+                    csv_dir = os.path.dirname(os.path.abspath(plan_file))
+                    csv_base = os.path.splitext(os.path.basename(plan_file))[0].lower()
+                    if os.path.isdir(csv_dir):
+                        for f in os.listdir(csv_dir):
+                            if f.lower().endswith(".txt") and "plan_placement" in f.lower():
+                                if csv_base in f.lower():
+                                    p_map = parse_placement_plan(os.path.join(csv_dir, f))
+                                    if p_map:
+                                        seat_map = p_map
+                                        break
             else:
                 # Recherche et sélection intelligente parmi tous les plans du projet
                 from app.pdf_reader import find_best_matching_plan
@@ -751,8 +762,9 @@ class QCMApp(tk.Tk):
                     seat_map=seat_map,
                     candidates=candidates_list
                 )
-                # Repli sur l'ordre de la liste CSV si aucun numéro/texte trouvé
-                if not detected_name and group_students and i < len(group_students):
+                # Repli sur l'ordre de la liste CSV UNIQUEMENT si aucun numéro de place n'a été détecté
+                # et qu'aucune correspondance optique n'a été trouvée (pour fiches séquentielles sans badges)
+                if not detected_name and detected_seat is None and group_students and i < len(group_students):
                     detected_name = group_students[i]
 
                 if detected_seat is None and seat_map and detected_name:
