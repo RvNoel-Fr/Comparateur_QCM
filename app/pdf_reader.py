@@ -358,29 +358,36 @@ def match_printed_name(pil_image: Image.Image, candidates: list[str]) -> tuple[s
 
 
 def find_candidate_plans(pdf_path: str) -> list[str]:
-    """Recherche tous les fichiers plan_placement.txt dans le dossier et l'espace de travail."""
+    """Recherche tous les fichiers plan de placement (*.txt) dans le dossier du PDF et l'espace de travail."""
     plans: list[str] = []
+    seen = set()
+
+    def add_plan(filepath: str):
+        full = os.path.abspath(filepath)
+        if full not in seen and os.path.isfile(full):
+            seen.add(full)
+            plans.append(full)
+
+    def scan_dir(directory: str, max_depth: int = 2):
+        if not directory or not os.path.isdir(directory):
+            return
+        for root, dirs, files in os.walk(directory):
+            rel = os.path.relpath(root, directory)
+            if rel != "." and rel.count(os.sep) >= max_depth:
+                dirs.clear()
+                continue
+            dirs[:] = [d for d in dirs if not d.startswith(".") and d not in ("node_modules", "build", ".venv", ".git")]
+            for f in files:
+                fl = f.lower()
+                if fl.endswith(".txt") and ("plan" in fl or "placement" in fl):
+                    add_plan(os.path.join(root, f))
+
     try:
-        p_dir = os.path.dirname(os.path.abspath(pdf_path))
-        # 1. Dossier du PDF
-        if os.path.isdir(p_dir):
-            for f in os.listdir(p_dir):
-                if "plan_placement" in f.lower() and f.endswith(".txt"):
-                    plans.append(os.path.join(p_dir, f))
-
-        # 2. Dossiers parents & sous-dossiers proches (ex: csv_test, multi_test)
-        parent = os.path.dirname(p_dir)
-        if os.path.isdir(parent):
-            for root, dirs, files in os.walk(parent):
-                if ".git" in root or ".venv" in root:
-                    continue
-                for f in files:
-                    if "plan_placement" in f.lower() and f.endswith(".txt"):
-                        full = os.path.join(root, f)
-                        if full not in plans:
-                            plans.append(full)
-
-        # Trier par date de modification (les plus récents en premier)
+        p_dir = os.path.dirname(os.path.abspath(pdf_path)) if pdf_path else ""
+        if p_dir:
+            scan_dir(p_dir, max_depth=1)
+            scan_dir(os.path.dirname(p_dir), max_depth=1)
+        scan_dir(os.getcwd(), max_depth=2)
         plans.sort(key=lambda p: os.path.getmtime(p), reverse=True)
     except Exception:
         pass
@@ -452,18 +459,34 @@ def find_best_matching_plan(pdf_path: str, pages_imgs: list[Image.Image]) -> tup
 def find_candidate_csvs(pdf_path: str) -> list[str]:
     """Recherche tous les fichiers CSV d'étudiants dans le dossier et l'espace de travail."""
     csvs: list[str] = []
+    seen = set()
+
+    def add_csv(filepath: str):
+        full = os.path.abspath(filepath)
+        if full not in seen and os.path.isfile(full):
+            seen.add(full)
+            csvs.append(full)
+
+    def scan_dir(directory: str, max_depth: int = 2):
+        if not directory or not os.path.isdir(directory):
+            return
+        for root, dirs, files in os.walk(directory):
+            rel = os.path.relpath(root, directory)
+            if rel != "." and rel.count(os.sep) >= max_depth:
+                dirs.clear()
+                continue
+            dirs[:] = [d for d in dirs if not d.startswith(".") and d not in ("node_modules", "build", ".venv", ".git")]
+            for f in files:
+                fl = f.lower()
+                if fl.endswith(".csv") and not fl.startswith("notes_"):
+                    add_csv(os.path.join(root, f))
+
     try:
-        p_dir = os.path.dirname(os.path.abspath(pdf_path))
-        parent = os.path.dirname(p_dir)
-        if os.path.isdir(parent):
-            for root, dirs, files in os.walk(parent):
-                if ".git" in root or ".venv" in root:
-                    continue
-                for f in files:
-                    if f.lower().endswith(".csv"):
-                        full = os.path.join(root, f)
-                        if full not in csvs:
-                            csvs.append(full)
+        p_dir = os.path.dirname(os.path.abspath(pdf_path)) if pdf_path else ""
+        if p_dir:
+            scan_dir(p_dir, max_depth=1)
+            scan_dir(os.path.dirname(p_dir), max_depth=1)
+        scan_dir(os.getcwd(), max_depth=2)
         csvs.sort(key=lambda p: os.path.getmtime(p), reverse=True)
     except Exception:
         pass

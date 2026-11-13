@@ -310,6 +310,12 @@ class QCMApp(tk.Tk):
         name_inner = tk.Frame(name_card, bg=BG)
         name_inner.pack(fill="x", padx=10, pady=6)
 
+        # Badge numéro de place (affiché dans un badge distinct du nom)
+        self._seat_badge_lbl = tk.Label(
+            name_inner, text="", font=("Segoe UI", 9, "bold"),
+            bg="#3b4261", fg="white", padx=8, pady=2
+        )
+
         tk.Label(name_inner, text="👤 Nom :", font=FONT_SMALL,
                  bg=BG, fg=SUBTEXT).pack(side="left")
         self._name_entry = tk.Entry(
@@ -772,7 +778,8 @@ class QCMApp(tk.Tk):
                     detected_seat = inv_map.get(detected_name)
 
                 name_crop = crop_name_zone(first_img, dpi=200)
-                display_name = detected_name if detected_name else f"Copie {i + 1}"
+                is_real_name = bool(detected_name and not detected_name.startswith("Place N°"))
+                display_name = detected_name if is_real_name else ""
 
                 s_results = extract_answers(sub_imgs)
                 s_debug = [draw_debug(img, s_results) for img in sub_imgs]
@@ -783,7 +790,7 @@ class QCMApp(tk.Tk):
                 sheets.append(StudentSheet(
                     index=i,
                     name=display_name,
-                    name_detected=bool(detected_name and not detected_name.startswith("Place N°")),
+                    name_detected=is_real_name,
                     name_crop=name_crop,
                     seat_number=detected_seat,
                     images=sub_imgs,
@@ -843,7 +850,7 @@ class QCMApp(tk.Tk):
 
     def _refresh_sheet_combo_list(self):
         vals = [
-            f"Copie {s.index + 1}{f' (Place {s.seat_number})' if s.seat_number is not None else ''} : {s.name}"
+            f"Copie {s.index + 1}{f' (Place {s.seat_number})' if s.seat_number is not None else ''} : {s.name if s.name_detected and s.name else '(Nom à renseigner)'}"
             for s in self._sheets
         ]
         self._sheet_combo["values"] = vals
@@ -858,17 +865,25 @@ class QCMApp(tk.Tk):
 
         self._refresh_sheet_combo_list()
 
-        # Nom
-        self._student_name.set(sheet.name)
-        seat_prefix = f"Place {sheet.seat_number} — " if sheet.seat_number is not None else ""
-        if sheet.name_detected:
-            self._name_hint.config(text=f"✓ {seat_prefix}Nom détecté", fg=SUCCESS)
-            self._link_plan_btn.pack_forget()
-        elif sheet.name.startswith("Place N°"):
-            self._name_hint.config(text=f"✓ Place détectée ({sheet.name})", fg=ACCENT2)
-            self._link_plan_btn.pack(side="left", padx=8)
+        # Numéro de place (affiché dans son propre badge distinct)
+        if sheet.seat_number is not None:
+            self._seat_badge_lbl.config(text=f"🏷️ Place {sheet.seat_number}")
+            self._seat_badge_lbl.pack(side="left", padx=(0, 8), before=self._name_entry)
         else:
-            self._name_hint.config(text=f"{seat_prefix}PDF scanné — vérifiez ou associez le groupe :", fg=SUBTEXT)
+            self._seat_badge_lbl.pack_forget()
+
+        # Nom de l'étudiant dans le champ dédié
+        if sheet.name_detected and sheet.name and not sheet.name.startswith("Place N°"):
+            self._student_name.set(sheet.name)
+            self._name_hint.config(text="✓ Nom identifié", fg=SUCCESS)
+            self._link_plan_btn.pack_forget()
+        else:
+            # Ne jamais afficher 'Place N° X' dans le champ réservé au nom
+            self._student_name.set("")
+            if sheet.seat_number is not None:
+                self._name_hint.config(text="Saisissez le nom ou associez un CSV/Plan :", fg=SUBTEXT)
+            else:
+                self._name_hint.config(text="Saisissez le nom de l'élève :", fg=SUBTEXT)
             self._link_plan_btn.pack(side="left", padx=8)
 
         if sheet.name_crop is not None:
@@ -937,20 +952,18 @@ class QCMApp(tk.Tk):
                 seat = detect_seat_number(first_img)
                 if seat is not None:
                     sheet.seat_number = seat
-                if seat is not None and seat in seat_map:
-                    new_name = seat_map[seat]
+                if sheet.seat_number is not None and sheet.seat_number in seat_map:
+                    new_name = seat_map[sheet.seat_number]
                 elif candidates:
                     m_name, sc = match_printed_name(first_img, candidates)
-                    if m_name and sc >= 0.28:
+                    if m_name and sc >= 0.38:
                         new_name = m_name
-                    elif group_students and sheet.index < len(group_students):
+                    elif sheet.seat_number is None and group_students and sheet.index < len(group_students):
                         new_name = group_students[sheet.index]
-                elif seat is not None:
-                    new_name = f"Place N° {seat}"
 
-            if new_name:
+            if new_name and not new_name.startswith("Place N°"):
                 sheet.name = new_name
-                sheet.name_detected = not new_name.startswith("Place N°")
+                sheet.name_detected = True
             if sheet.seat_number is None and seat_map and sheet.name in {v: k for k, v in seat_map.items()}:
                 sheet.seat_number = {v: k for k, v in seat_map.items()}[sheet.name]
 
