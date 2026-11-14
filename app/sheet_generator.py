@@ -395,7 +395,6 @@ def _draw_page(c, title: str, page_num: int, total_pages: int,
     # ── Lignes de questions ───────────────────────────────────────────────────
     for idx, q_num in enumerate(range(q_start, q_end + 1)):
         row_y_top = h - (GRID_TOP_CM + idx * ROW_H_CM) * cm
-        row_center = row_y_top - (BOX_SIDE_CM * cm) / 2 - 0.05 * cm
 
         # Fond alterné léger
         if idx % 2 == 0:
@@ -403,17 +402,23 @@ def _draw_page(c, title: str, page_num: int, total_pages: int,
             c.rect(2.0 * cm, row_y_top - ROW_H_CM * cm,
                    w - 4.0 * cm, ROW_H_CM * cm, fill=1, stroke=0)
 
-        # Numéro de question
+        # Position verticale des cases à cocher et axe médian
+        by = row_y_top - (0.1 + BOX_SIDE_CM) * cm
+        bside = BOX_SIDE_CM * cm
+        box_axis_y = by + bside / 2.0
+
+        # Numéro de question : centré exactement sur l'axe horizontal des cases à cocher
+        # En ReportLab, drawString utilise la ligne de base (baseline).
+        # Pour Helvetica 9pt, le demi-cap-height est d'environ 3.25 pt (~0.115 cm).
+        q_text_y = box_axis_y - 0.115 * cm
         c.setFont("Helvetica", 9)
         c.setFillColorRGB(0.1, 0.1, 0.1)
-        c.drawString(COL0_X_CM * cm, row_center,
+        c.drawString(COL0_X_CM * cm, q_text_y,
                      f"Q{q_num:02d}.")
 
         # Cases à cocher
         for i in range(num_choices):
             bx = (FIRST_BOX_X_CM + i * COL_SPACING_CM) * cm
-            by = row_y_top - (0.1 + BOX_SIDE_CM) * cm
-            bside = BOX_SIDE_CM * cm
             c.setStrokeColorRGB(0.15, 0.15, 0.15)
             c.setFillColorRGB(1.0, 1.0, 1.0)
             c.setLineWidth(0.8)
